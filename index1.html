@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aditi's Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Variables */
+    :root {
+      --accent-color: #2a2a72;
+      --text-color: #111;
+      --btn-color: #0c61f4;
+      --btn-hover-color: #1533ff;
+      --light-bg: #f8f9fa;
+      --nav-bg: #ffffff;
+      --dark-bg: #222222;
+      --dark-nav-bg: #383838;
+      --dark-text: #ffffff;
+      --dark-accent: #6a6ac9;
+      --dark-btn-color: #4a8be5;
+      --dark-btn-hover: #5a9bf5;
+    }
+
+    /* Dark mode variables */
+    [data-theme="dark"] {
+      --accent-color: var(--dark-accent);
+      --text-color: var(--dark-text);
+      --light-bg: var(--dark-bg);
+      --nav-bg: var(--dark-nav-bg);
+      --btn-color: var(--dark-btn-color);
+      --btn-hover-color: var(--dark-btn-hover);
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-color);
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      perspective: 1000px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 2rem;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: var(--nav-bg);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.3s ease;
+    }
+
+    [data-theme="dark"] nav {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar {
+      padding: 1rem 0;
+    }
+
+    nav .logo {
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-nav {
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-color) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-color) !important;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle-container {
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--nav-bg);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 500;
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] .theme-toggle-btn {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .theme-toggle-btn i {
+      font-size: 1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, #8EC5FC, #E0C3FC);
+      color: var(--text-color);
+      text-align: center;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0 1rem;
+    }
+
+    [data-theme="dark"] .hero {
+      background: linear-gradient(to right, #1a2a3a, #3a4a5a);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid var(--accent-color);
+      width: 0;
+      animation: typing 3.5s steps(17) infinite, blink 0.75s step-end infinite;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .highlight {
+      color: var(--btn-color);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      max-width: 500px;
+    }
+
+    .btn-custom {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      color: white;
+      background-color: var(--btn-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: var(--btn-hover-color);
+      transform: translateY(-5px) rotateX(10deg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Typing Animation */
+    @keyframes typing {
+      0%,
+      20% {
+        width: 0;
+      }
+
+      50%,
+      70% {
+        width: 17ch;
+      }
+
+      100% {
+        width: 0;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* Section Titles */
+    section {
+      padding: 4rem 0;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    /* About Section */
+    #about .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 3rem;
+      background-color: var(--section-bg);
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    #about img {
+      flex: 1 1 300px;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    #about img:hover {
+      transform: scale(1.03);
+    }
+
+    #about .about-text {
+      flex: 1 1 500px;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--text-color);
+      text-align: justify;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Optional: For responsiveness */
+    @media (max-width: 768px) {
+      #about .container {
+        flex-direction: column;
+        padding: 1.5rem;
+      }
+
+      #about img,
+      #about .about-text {
+        max-width: 80%;
+      }
+    }
+
+
+
+   /* Skills Section */
+    #skills {
+    padding: 4rem 0;
+    }
+
+    #skills h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    }
+
+    .skills-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    }
+
+    .skills-category {
+    margin-bottom: 2.5rem;
+    }
+
+    .skills-category h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    }
+
+    .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    }
+
+    .skill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--light-bg);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    color: var(--accent-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: default;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+    }
+
+    [data-theme="dark"] .skill {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .skill i {
+    font-size: 1.2rem;
+    }
+
+    .skill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--accent-color);
+    color: white;
+    transform: rotateY(15deg) scale(1.05);
+    }
+
+    .skill:hover i {
+    color: white;
+    }
+
+    @media (max-width: 768px) {
+    .skills-list {
+        justify-content: center;
+    }
+    
+    .skills-category h3 {
+        text-align: center;
+    }
+    }
+
+    /* Experience Section */
+    #experience {
+    padding: 4rem 0;
+    background-color: rgba(42, 42, 114, 0.05);
+    }
+
+    [data-theme="dark"] #experience {
+    background-color: rgba(106, 106, 201, 0.05);
+    }
+
+    .experience-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    }
+
+    .experience-card {
+    background-color: var(--light-bg);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] .experience-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .experience-header {
+    margin-bottom: 1.5rem;
+    }
+
+    .experience-header h3 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .experience-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 0.95rem;
+    }
+
+    .experience-details ul {
+    padding-left: 1.5rem;
+    }
+
+    .experience-details li {
+    margin-bottom: 0.75rem;
+    position: relative;
+    list-style-type: none;
+    }
+
+    .experience-details li:before {
+    content: "▹";
+    position: absolute;
+    left: -1.5rem;
+    color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+    .experience-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .experience-card {
+        padding: 1.5rem;
+    }
+    }
+
+    /* Projects Section */
+    #projects .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+
+    #projects .project-card {
+      background-color: var(--light-bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] #projects .project-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    #projects .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    #projects .project-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      object-fit: cover;
+      height: 160px;
+    }
+
+    #projects .project-card h3 {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    #projects .project-card p {
+      flex-grow: 1;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    #projects .project-card a {
+      align-self: flex-start;
+      color: white;
+      background-color: var(--btn-color);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    #projects .project-card a:hover {
+      background-color: var(--btn-hover-color);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--accent-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      #about .container {
+        flex-direction: column;
+      }
+      
+      .navbar-collapse {
+        padding-top: 1rem;
+      }
+      
+      .theme-toggle-container {
+        margin-left: 0;
+        justify-content: center;
+        padding: 1rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand logo" href="#">PORTFOLIO.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#experience">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <div class="theme-toggle-container">
+              <div class="theme-toggle-btn" id="themeToggle" role="button" aria-label="Toggle dark/light theme" tabindex="0">
+                <i class="fas fa-moon" id="themeIcon"></i>
+                <span id="themeLabel">Dark Mode</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Hello, I'm <span class="highlight">Aditi</span></h1>
+    <p>Welcome to my portfolio website showcasing my skills and projects.</p>
+    <div class="hero-buttons" style="display: flex; gap: 1rem; margin-top: 1rem;">
+      <a href="#projects" class="btn-custom">
+        <i class="fas fa-eye"></i> See my work
+      </a>
+      <a href="Aditi_Paitandy_Resume.pdf" download class="btn-custom" style="background-color: #4CAF50;">
+        <i class="fas fa-download"></i> Download Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <img src="photo.jpg" alt="Aditi's photo" />
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>
+          I’m a confident and goal-oriented MCA student specializing in Data Science, with a solid foundation in front-end development and a growing skill set in data analytics and visualization. Proficient in HTML, CSS, JavaScript, PHP, SQL, Python, Excel, and tools like Tableau and Google Sheets, I’ve applied these skills in real-world projects and internships to build responsive, data-driven web solutions. Known for my work ethic, critical thinking, and collaborative approach, I thrive in environments that encourage innovation and continuous learning. I aim to contribute to both service-based and product-based IT companies by leveraging data and technology to deliver meaningful, user-centric solutions that drive strategic growth.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+    <section id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-container">
+        <div class="skills-category">
+        <h3>Programming Languages</h3>
+        <div class="skills-list">
+            <div class="skill">
+            <i class="fab fa-cuttlefish"></i>
+            <span>C</span>
+            </div>
+            <div class="skill">
+            <i class="fab fa-cuttlefish"></i>
+            <span>C++</span>
+            </div>
+            <div class="skill">
+            <i class="fab fa-java"></i>
+            <span>Java</span>
+            </div>
+            <div class="skill">
+            <i class="fab fa-python"></i>
+            <span>Python</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-database"></i>
+            <span>SQL</span>
+            </div>
+        </div>
+        </div>
+
+        <div class="skills-category">
+        <h3>Web Development</h3>
+        <div class="skills-list">
+            <div class="skill">
+            <i class="fab fa-html5"></i>
+            <span>HTML5</span>
+            </div>
+            <div class="skill">
+            <i class="fab fa-css3-alt"></i>
+            <span>CSS3</span>
+            </div>
+            <div class="skill">
+            <i class="fab fa-js"></i>
+            <span>JavaScript</span>
+            </div>
+            <div class="skill">
+            <i class="fab fa-php"></i>
+            <span>PHP</span>
+            </div>
+        </div>
+        </div>
+
+        <div class="skills-category">
+        <h3>UI/UX & Databases</h3>
+        <div class="skills-list">
+            <div class="skill">
+            <i class="fas fa-paint-brush"></i>
+            <span>UI/UX Design</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-project-diagram"></i>
+            <span>Neo4j</span>
+            </div>
+        </div>
+        </div>
+
+        <div class="skills-category">
+        <h3>Machine Learning</h3>
+        <div class="skills-list">
+            <div class="skill">
+            <i class="fas fa-chart-line"></i>
+            <span>Data Analysis</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-robot"></i>
+            <span>Natural Language Processing</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-eye"></i>
+            <span>Computer Vision</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-calculator"></i>
+            <span>TensorFlow</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-network-wired"></i>
+            <span>PyTorch</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-chart-bar"></i>
+            <span>Scikit-learn</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-cloud"></i>
+            <span>ML Deployment</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-table"></i>
+            <span>Excel</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-chart-pie"></i>
+            <span>Tableau</span>
+            </div>
+            <div class="skill">
+            <i class="fas fa-project-diagram"></i>
+            <span>Power BI</span>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- experience -->
+    <section id="experience">
+    <h2>My Experience</h2>
+    <div class="experience-container">
+        <div class="experience-card">
+        <div class="experience-header">
+            <h3>Front-End Developer Intern</h3>
+            <div class="experience-meta">
+            <span class="company">Earn N Learn Technologies</span>
+            <span class="duration">3 months</span>
+            </div>
+        </div>
+        <div class="experience-details">
+            <ul>
+            <li>Developed interactive and responsive web pages using HTML, CSS, and JavaScript</li>
+            <li>Collaborated with backend developers to integrate APIs and databases</li>
+            <li>Optimized website performance and improved user experience</li>
+            </ul>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <a href="https://www.linkedin.com/feed/update/urn:li:activity:7267238695022280704/" 
+            target="_blank" 
+            style="display: inline-flex; 
+                    align-items: center; 
+                    gap: 0.5rem; 
+                    padding: 0.7rem 1.8rem; 
+                    background-color: #0077b5; 
+                    color: white; 
+                    text-decoration: none; 
+                    border-radius: 50px; 
+                    font-weight: 600; 
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <i class="fas fa-external-link-alt"></i> Check out here
+          </a>
+</div>
+        </div>
+    </div>
+    </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="ovs.jpeg" alt="Project 1" />
+        <h3>Online Voting System</h3>
+        <p>A secure voting system developed in PHP and MySQL.</p>
+        <a href="https://github.com/aditipaitandy/PROJECT">View Project</a>
+      </div>
+      <div class="project-card">
+        <img src="netflix.png" alt="Project 2" />
+        <h3>Netflix Landing Page</h3>
+        <p>A responsive clone of Netflix's landing page designed with modern UI elements to showcase front-end development skills.</p>
+        <a href="https://netflix-landing-page-six.vercel.app/">View Project</a>
+      </div>
+      <div class="project-card">
+        <img src="fjd.png" alt="Project 3" />
+        <h3>Fake Job Posting Detection</h3>
+        <p>This shows a Machine Learning project of detecting fake job</p>
+        <a href="https://github.com/aditipaitandy/Fake_Job_Posting_detection">View Project</a>
+      </div>
+      <div class="project-card">
+        <img src="graph_final.png" alt="Project 4" />
+        <h3>Movie Ticket Booking System using Neo4j</h3>
+        <p>A movie ticket booking application that leverages the Neo4j graph database to efficiently manage movie schedules, user bookings, and theater relationships.</p>
+        <a href="https://github.com/aditipaitandy/Movie_Ticket_Booking_System_using_Neo4j">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <img src="mmg.png" alt="Project 5" />
+        <h3>Memory Match Game</h3>
+        <p>A fun and interactive web-based game where players flip cards to find matching pairs. Helps improve memory and concentration.</p>
+        <a href="#">View Project</a>
+      </div>
+      <div class="project-card">
+       <img src="flow.png" alt="Project 6" />
+       <h3>Flow Application</h3>
+       <p>A web application addressing the water crisis in Karnataka through informative content, student interviews, and actionable solutions aimed at spreading awareness and encouraging conservation.</p>
+       <a href="https://www.figma.com/proto/irMJZTBIYfqD76QSUotsVf/FLOW-APP?node-id=0-1802&starting-point-node-id=0%3A1802">View Project</a>
+      </div>
+
+    </div>
+  </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="padding: 80px 20px; background: #f8f9fa; font-family: 'Helvetica Neue', sans-serif;">
+    <div style="max-width: 650px; margin: auto; background: #ffffff; padding: 50px 40px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);">
+      
+      <h2 style="font-size: 2.2em; color: #212529; margin-bottom: 10px; text-align: center;">Let's Get in Touch</h2>
+      <p style="font-size: 1em; color: #6c757d; text-align: center; margin-bottom: 35px;">
+        Feel free to reach out with questions or collaboration ideas. I’ll get back to you as soon as I can!
+      </p>
+
+      <form action="https://formspree.io/f/xqaqrrjp" method="POST" style="display: flex; flex-direction: column; gap: 25px;">
+        
+        <div>
+          <label for="email" style="display: block; font-weight: 600; color: #495057; margin-bottom: 8px;">Your Email</label>
+          <input type="email" name="email" id="email" required placeholder="you@example.com"
+            style="width: 100%; padding: 12px 14px; border: 1px solid #ced4da; border-radius: 6px; font-size: 1em; background-color: #fefefe;">
+        </div>
+
+        <div>
+          <label for="message" style="display: block; font-weight: 600; color: #495057; margin-bottom: 8px;">Your Message</label>
+          <textarea name="message" id="message" required placeholder="Type your message..." rows="6"
+            style="width: 100%; padding: 12px 14px; border: 1px solid #ced4da; border-radius: 6px; font-size: 1em; background-color: #fefefe; resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit"
+          style="padding: 12px 25px; background-color: #0056b3; color: white; font-size: 1em; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background-color 0.3s;">
+          Send Message
+        </button>
+
+        <div id="form-status" style="display:none; margin-top: 20px; color: #198754; font-weight: 500;">
+          ✅ Thank you! Your message has been sent.
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+
+    <script>
+    const form = document.querySelector(".contact-form");
+    const status = document.getElementById("form-status");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+        form.reset();
+        status.style.display = "block";
+        } else {
+        alert("Oops! Something went wrong.");
+        }
+    });
+    </script>
+
+    <footer style="background-color: #2a2a72; color: white; text-align: center; padding: 1.5rem 0; font-size: 0.9rem;">
+    <p style="margin-bottom: 1rem;">&copy; 2025 Aditi Paitandy. All rights reserved.</p>
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+        <a href="https://github.com/aditipaitandy" target="_blank" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+        <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/aditi-paitandy-750629317/" target="_blank" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+        <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.hackerrank.com/profile/aditipaitandy201" target="_blank" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+        <i class="fab fa-hackerrank"></i>
+        </a>
+        <a href="https://leetcode.com/u/fYyVZg0Ta2/" target="_blank" style="color: white; font-size: 1.5rem; transition: color 0.3s;">
+        <i class="fas fa-code"></i>
+        </a>
+    </div>
+    </footer>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+  <!-- Bootstrap JS CDN (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggleBtn = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeLabel = document.getElementById('themeLabel');
+
+      // Load saved theme from localStorage or default to light
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+
+      function updateToggleUI(theme) {
+        if (theme === 'dark') {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          themeLabel.textContent = 'Light Mode';
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          themeLabel.textContent = 'Dark Mode';
+        }
+      }
+
+      // Initialize toggle UI on page load
+      updateToggleUI(savedTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        let currentTheme = document.documentElement.getAttribute('data-theme');
+        let newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateToggleUI(newTheme);
+      });
+
+      // Keyboard accessibility for toggle button
+      themeToggleBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          themeToggleBtn.click();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
